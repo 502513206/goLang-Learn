@@ -4,7 +4,11 @@ import (
 	"fmt"
 )
 
-var array [5]int
+var array [5]int = [5]int{1, 2, 3, 4, 5}
+var array2 = [...]int{}
+
+// 	声明字符串切片
+var strList []string
 
 // 表示值类型
 // 声明
@@ -69,20 +73,52 @@ func loop3() {
 	}
 }
 
-func loop4(i int) {
+func loop4(i int) int {
 	switch i {
 	case 1:
 		fallthrough
 	case 2:
 		fmt.Println(2)
 	}
+	return 1
 }
 
+func testFunc() {
+	// new(Type),初始化零值
+	ptr := new(int)
+	fmt.Println(ptr)
+	fmt.Println(*ptr)
+	// *field:解析地址中的值
+}
+
+func annoFunc() (int, int) {
+	return 100, 200
+}
+
+func stringFunc() {
+	var a4 byte = 'A'
+	var b4 byte = 65
+	var c4 rune = 'B'
+	fmt.Println(a4)
+	fmt.Println(b4)
+}
 func main() {
+	a3, _b3 := annoFunc()
+	_a3, b3 := annoFunc()
+	fmt.Println(a3, b3, _a3, _b3)
+	testFunc()
+	name := "张三"
+	// 复制地址
+	cName := &name
+	fmt.Println(name)
+	name = "李四"
+	fmt.Println(name)
+	fmt.Println(*cName)
 	//loop()
 	//loop2()
 	//loop3()
-	loop4(2)
+	//loop4(2)
+	fmt.Println(c)
 	//Judge2()
 	//b = "c"
 	//fmt.Println(a)
