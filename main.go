@@ -41,6 +41,18 @@ func Judge() {
 	}
 }
 
+func mapFunc() {
+	var sources map[string]int = map[string]int{"english": 80}
+	sources2 := map[string]int{"english": 100}
+	sources3 := make(map[string]int)
+	if sources3 == nil {
+		fmt.Println("进行初始化")
+	}
+	fmt.Println(sources)
+	fmt.Println(sources2)
+	fmt.Println(sources3)
+}
+
 func Judge2() {
 	i := 0
 Here:
@@ -88,6 +100,7 @@ func testFunc() {
 	ptr := new(int)
 	fmt.Println(ptr)
 	fmt.Println(*ptr)
+	fmt.Println("执行")
 	// *field:解析地址中的值
 }
 
@@ -101,12 +114,45 @@ func stringFunc() {
 	var c4 rune = 'B'
 	fmt.Println(a4)
 	fmt.Println(b4)
+	fmt.Println(c4)
 }
+
+func exceFunc() {
+	var i interface{} = 10
+	t1 := i.(int)
+	fmt.Println(t1)
+
+	t2 := i.(string)
+	fmt.Println(t2)
+
+	defer func() {
+		recover()
+	}()
+}
+
+func selectFunc() {
+	cc1 := make(chan string, 1)
+	cc2 := make(chan string, 1)
+	cc2 <- "hello"
+	select {
+	case msg1 := <-cc1:
+		fmt.Println("c1 received:", msg1)
+	case msg2 := <-cc2:
+		fmt.Println("c2 received:", msg2)
+	default:
+		fmt.Println("...")
+	}
+}
+
 func main() {
+	exceFunc()
+	mapFunc()
 	a3, _b3 := annoFunc()
 	_a3, b3 := annoFunc()
 	fmt.Println(a3, b3, _a3, _b3)
-	testFunc()
+	// 等当前函数执行完在执行
+	// 晚于return执行，可用于释放资源
+	defer testFunc()
 	name := "张三"
 	// 复制地址
 	cName := &name
